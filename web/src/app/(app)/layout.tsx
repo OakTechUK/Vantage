@@ -4,7 +4,7 @@ import { AppShell } from "@/components/app-shell";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const officer = await getSession();
-  if (!officer) redirect("/login");
+  if (!officer) redirect("/api/auth/logout?next=/login");
 
   return <AppShell officer={officer}>{children}</AppShell>;
 }

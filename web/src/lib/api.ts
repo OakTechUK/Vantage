@@ -27,7 +27,7 @@ export async function serverApi<T>(path: string, init?: RequestInit): Promise<T>
     cache: "no-store",
   });
 
-  if (response.status === 401) redirect("/login");
+  if (response.status === 401) redirect("/api/auth/logout?next=/login");
   if (!response.ok) {
     const body = await response.text();
     throw new Error(`API request failed (${response.status}): ${body}`);

@@ -23,7 +23,7 @@ import { StatCard, MiniStat } from "@/components/stat-card";
 import { CaseTable } from "@/components/case-table";
 import { RiskBadge } from "@/components/status-badges";
 import { serverApi, getSession } from "@/lib/api";
-import { formatDateTime } from "@/lib/format";
+import { formatDateTime, titleCase } from "@/lib/format";
 import type { Dashboard, RiskLevel } from "@/lib/types";
 
 const riskOrder: RiskLevel[] = ["Critical", "High", "Medium", "Low"];
@@ -43,7 +43,7 @@ export default async function DashboardPage() {
   const { stats } = dashboard;
   const activeRiskTotal = dashboard.riskBreakdown.reduce((sum, item) => sum + item.count, 0);
   const firstName = officer
-    ? officer.displayName.replace(officer.rank, "").trim().split(" ")[0] || officer.displayName
+    ? titleCase(officer.email.split("@")[0].split(".")[0])
     : "Officer";
 
   return (
